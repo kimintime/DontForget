@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script src="todo.js"></script>
+		<title>Don't Forget</title>
+	</head>
+	<body onload="putData()" onchange="getData();">
+		<header id="title">Don't Forget!</header>
+		<div class="center">
+  			<input type="text" id="myInput" class="entry" placeholder="Add your to-do here...">
+  			<span onclick="put()" class="addButton" id="myAdd">Add</span>
+  			<span onclick="date()" class="addButton">More</span>
+  			<div class="dropdown">
+  					<button class="dropbtn">Edit</button>
+  						<div class="dropdown-content">
+  							<a href="#" onclick="edit()">Edit last</a>
+  							<a href="#" onclick="putData()">Undo delete</a>
+    						<a href="#" onclick="getData(); total(); completed()">Save tasks</a>
+    						<a href="#" onclick="removeData()">Delete all</a>
+  						</div>
+			</div>
+		</div>
+		<div id="hide" class="center">
+			<input type="text" id="extraCategory" class="entry" placeholder="Add a category here...">
+			<input type="date" id="extraDate">
+			<span onclick="put()" class="addButton" id="extraAdd">Add</span>
+			<span onclick="closeInput()" class="addButton" id="closeButton">Close</span>
+		</div>
+		<div class="center" id="table">
+			<table class="tg" id="list" onload="putData()" onchange="status()">
+				<thead>
+  					<tr>
+  						<th class="tg-eqm3">Type</th>
+    					<th class="tg-eqm3">Date</th>
+    					<th class="tg-eqm3">Description</th>
+    					<th class="tg-eqm3">Status</th>
+    					<th class="tg-0pky">Remove</th>
+  					</tr>
+				</thead>
+				<tbody id="tbody">
+  					<tr>
+  						<td class="tg-btxf" id="type"></td>
+    					<td class="tg-btxf" id="date"></td>
+    					<td class="tg-btxf" id="description"></td>
+    					<td class="tg-btxf" id="status"></td>
+    					<td class="tg-btxf" id="remove"></td>
+  					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="tally">
+			<button type="button" onclick="hideCompleted()">Hide Completed</button>
+			<button type="button" onclick="onlyCompleted()">Show Completed</button>
+			<button type="button" onclick="putData()">Show All</button>
+			<ul>
+				<li id="total">Total Tasks: </li>
+				<li id="completed">Completed Tasks: </li>
+			</ul>	
+		</div>
+		<script>
+			var z = document.getElementById("hide");
+            z.style.display = "none";
+        </script>
+	</body>
+</html>
+
+
+			
+
+
