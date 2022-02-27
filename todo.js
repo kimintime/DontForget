@@ -226,7 +226,7 @@ function total() {
 
 	var totalRowCount = table.rows.length - 2;
 
-	document.getElementById("total").innerHTML = "<ul>Total Tasks: " +totalRowCount+ "</ul>";
+	document.getElementById("total").innerHTML = "<li>Total Tasks: " +totalRowCount+ "</li>";
 
 }
 
@@ -250,7 +250,7 @@ function completed() {
 		}
 	}
 
-	document.getElementById("completed").innerHTML = "<ul>Completed Tasks: " +counter+ "</ul>";
+	document.getElementById("completed").innerHTML = "<li>Completed Tasks: " +counter+ "</li>";
 }
 
 
