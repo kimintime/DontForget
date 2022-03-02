@@ -2,7 +2,7 @@
 - by Kimberly Ruohio, for Laurea UAS Dynamic Web Applications with Javascript course */
 
 /* Global code to accept keyboard entry. This is copied but goes to website functionality,
-and I understand what's going on here.*/
+and I understand what's going on here, such that the enter key calls up the put() function.*/
 
 document.addEventListener("keyup", function(event) {
     if (event.code === 'Enter') {
@@ -13,7 +13,7 @@ document.addEventListener("keyup", function(event) {
 
 
 /* The main function of the entire thing. Takes values from the myInput, date, and category fields.
-Then it sets up the checkbox type, and the deleted button that goes next to each entry. It also sets up
+Then it sets up the checkbox type, and the delete button that goes next to each entry. It also sets up
 rows with these values, for entry into the table. The function then checks to make sure the myInput field
 isn't empty. The user doesn't have to enter a date, and that date doesn't need to be before today, nor
 do they have to add a category. But the description field can't be empty. 
@@ -23,7 +23,7 @@ styling, and setsup its onclick attribute to call the delEntry function, sending
 
 As long as the myInput field isn't empty, the values are sent to a new table row, and those values sent
 to sessionStorage, so that the user can bring those values back into their respective fields for editing.
-Data is then sent to localStorage, and the total and counter functions are called, and keeping track of 
+Data is then sent to localStorage, and the total and counter functions are called, keeping track of 
 completed tasks. */
 
 function put() {
@@ -156,12 +156,16 @@ function status() {
 
 /* Shows only uncompleted tasks. If a checkbox is checked, then that row is hidden. The show and hide states are
 not saved on page reload. If the user ends up hiding more than they intended, changes can be undone in the Edit 
-dropdown menu, selecting Undo Delete, or by clicking Show All.*/
+dropdown menu, selecting Undo Delete, or by clicking Show All. However, with the putData() function being called
+before the conditions are checked, that resets the list to its 'show all' state, so the buttons should always 
+work as intended.*/
 
 function hideCompleted() {
 
 	var table = document.getElementById("list");
 	var checkBoxes = table.getElementsByTagName("input");
+	
+	putData();
 
 	for (var i = 0; i < checkBoxes.length; i++) {
 
@@ -177,14 +181,18 @@ function hideCompleted() {
 }
 
 
-/* Shows only completed tasks. If a checkbox is not checked, then that row is hidden from view. If the user ends up 
-hiding more than they intended, changes can be undone in the Edit dropdown menu, selecting Undo delete, or by clicking
-Show All. */
+/* Shows only completed tasks. If a checkbox is not checked, then that row is hidden from view. 
+If the user ends up hiding more than they intended, changes can be undone in the Edit dropdown menu, 
+selecting Undo delete, or by clicking Show All. However, with the putData() function being called before 
+the conditions are checked, that resets the list to its 'show all' state, so the buttons should always 
+work as intended.*/
 
 function onlyCompleted() {
 
 	var table = document.getElementById("list");
 	var checkBoxes = table.getElementsByTagName("input");
+	
+	putData();
 
 	for (var i = 0; i < checkBoxes.length; i++) {
 
@@ -218,7 +226,8 @@ function delEntry(row) {
 
 
 /* Simply keeps a counter going of all tasks, the put function, delEntry function, and edit function call it, 
-as they effect the count.*/
+as they effect the count. As you can see, the total and completed functions keep their respective counts differently. 
+This function does it by counting the table rows, needing to subtract two for the correct count.*/
 
 function total() {
 
@@ -304,8 +313,8 @@ so in the status function, if a box is checked, then the name attribute is set, 
 this function, it can search for the name attribute being set to checkbox. Then if it is, 
 set the checkbox state to true. The function then applies the counter values. 
 
-This function is also called when the user clicks the show all button, as functionally it 
-does what it says on the tin. */
+This function is also called when the user clicks the show all, completed, and hide completed buttons, 
+as functionally it does what it says on the tin. */
 
 function putData() {
 
